@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "qianhui-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "3100"],
+      "port": 3100,
+      "cwd": "C:\\Users\\Yap Zheng Xian\\Documents\\Programming\\Qian Hui Personal website"
+    }
+  ]
+}

@@ -1,0 +1,424 @@
+@import "tailwindcss";
+
+/* Default palette — admins can override any of these from
+   Settings → Theme colors (see src/lib/theme.ts). */
+@theme {
+  --color-desk: #c9d6fb;
+  --color-grid: #e6ecff;
+  --color-paper: #fde9d3;
+  --color-ink: #3d2b2b;
+  --color-yolk: #f5c94e;
+  --color-bubble: #f48fb4;
+  --color-sky: #62b8ad;
+  --color-lime: #7fcf70;
+  --color-grape: #8ea4f0;
+  --color-tangerine: #f08a3c;
+
+  --shadow-brutal: 4px 4px 0 0 var(--color-ink);
+  --shadow-brutal-sm: 3px 3px 0 0 var(--color-ink);
+  --shadow-brutal-lg: 6px 6px 0 0 var(--color-ink);
+}
+
+/* next/font variables live on <body>, so these must be inlined
+   at point of use rather than resolved on :root */
+@theme inline {
+  --font-display: var(--font-pixel);
+  --font-body: var(--font-pixel);
+  --font-mono: var(--font-term), ui-monospace, monospace;
+}
+
+/* Pixel arrow cursor, like the one in an old desktop OS. */
+html {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='32' viewBox='0 0 11 16' shape-rendering='crispEdges'%3E%3Cpath fill='%233d2b2b' d='M0 0h1v1H0zM0 1h1v1H0zM1 1h1v1H1zM0 2h1v1H0zM2 2h1v1H2zM0 3h1v1H0zM3 3h1v1H3zM0 4h1v1H0zM4 4h1v1H4zM0 5h1v1H0zM5 5h1v1H5zM0 6h1v1H0zM6 6h1v1H6zM0 7h1v1H0zM7 7h1v1H7zM0 8h1v1H0zM8 8h1v1H8zM0 9h1v1H0zM9 9h1v1H9zM0 10h1v1H0zM6 10h1v1H6zM7 10h1v1H7zM8 10h1v1H8zM9 10h1v1H9zM10 10h1v1H10zM0 11h1v1H0zM3 11h1v1H3zM6 11h1v1H6zM0 12h1v1H0zM2 12h1v1H2zM4 12h1v1H4zM7 12h1v1H7zM0 13h1v1H0zM1 13h1v1H1zM4 13h1v1H4zM7 13h1v1H7zM0 14h1v1H0zM5 14h1v1H5zM8 14h1v1H8zM5 15h1v1H5zM6 15h1v1H6zM7 15h1v1H7z'/%3E%3Cpath fill='%23fde9d3' d='M1 2h1v1H1zM1 3h1v1H1zM2 3h1v1H2zM1 4h1v1H1zM2 4h1v1H2zM3 4h1v1H3zM1 5h1v1H1zM2 5h1v1H2zM3 5h1v1H3zM4 5h1v1H4zM1 6h1v1H1zM2 6h1v1H2zM3 6h1v1H3zM4 6h1v1H4zM5 6h1v1H5zM1 7h1v1H1zM2 7h1v1H2zM3 7h1v1H3zM4 7h1v1H4zM5 7h1v1H5zM6 7h1v1H6zM1 8h1v1H1zM2 8h1v1H2zM3 8h1v1H3zM4 8h1v1H4zM5 8h1v1H5zM6 8h1v1H6zM7 8h1v1H7zM1 9h1v1H1zM2 9h1v1H2zM3 9h1v1H3zM4 9h1v1H4zM5 9h1v1H5zM6 9h1v1H6zM7 9h1v1H7zM8 9h1v1H8zM1 10h1v1H1zM2 10h1v1H2zM3 10h1v1H3zM4 10h1v1H4zM5 10h1v1H5zM1 11h1v1H1zM2 11h1v1H2zM4 11h1v1H4zM5 11h1v1H5zM1 12h1v1H1zM5 12h1v1H5zM6 12h1v1H6zM5 13h1v1H5zM6 13h1v1H6zM6 14h1v1H6zM7 14h1v1H7z'/%3E%3C/svg%3E")
+      0 0,
+    auto;
+}
+
+body {
+  background-color: var(--color-desk);
+  color: var(--color-ink);
+  font-family: var(--font-pixel), ui-monospace, monospace;
+  /* graph-paper grid, like the desktop behind the windows */
+  background-image:
+    linear-gradient(var(--color-grid) 2px, transparent 2px),
+    linear-gradient(90deg, var(--color-grid) 2px, transparent 2px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+}
+
+::selection {
+  background: var(--color-bubble);
+  color: var(--color-ink);
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-pixel), ui-monospace, monospace;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+input[type="range"],
+input[type="checkbox"],
+input[type="radio"],
+progress {
+  accent-color: var(--color-grape);
+}
+
+/* ---- retro pixel building blocks ----
+   The class names are kept from the original theme so every page picks up
+   the new look; only their styling changed. */
+
+/* A window / card: thin dark outline and a hard pixel drop shadow. */
+.brutal,
+.brutal-sm,
+.brutal-lg {
+  border: 3px solid var(--color-ink);
+}
+.brutal { box-shadow: var(--shadow-brutal); }
+.brutal-sm { box-shadow: var(--shadow-brutal-sm); }
+.brutal-lg { box-shadow: var(--shadow-brutal-lg); }
+
+/* Pixel "pill" button. The outline is drawn with four edge-only shadows, so
+   the corners stay notched like an 8-bit sprite; the inset shadow is the
+   bevel. */
+.brutal-btn {
+  border: none;
+  box-shadow:
+    0 -3px 0 0 var(--color-ink),
+    0 3px 0 0 var(--color-ink),
+    -3px 0 0 0 var(--color-ink),
+    3px 0 0 0 var(--color-ink),
+    inset -3px -3px 0 0 rgb(0 0 0 / 0.14),
+    inset 3px 3px 0 0 rgb(255 255 255 / 0.35);
+  margin: 3px;
+  font-weight: 700;
+  transition: transform 60ms steps(2), filter 60ms steps(2);
+  cursor: pointer;
+}
+
+.brutal-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.brutal-btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 -3px 0 0 var(--color-ink),
+    0 3px 0 0 var(--color-ink),
+    -3px 0 0 0 var(--color-ink),
+    3px 0 0 0 var(--color-ink),
+    inset 3px 3px 0 0 rgb(0 0 0 / 0.18);
+}
+
+.brutal-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+/* Label tag, like the "FOR COMMERCIAL USE" pill. */
+.sticker {
+  display: inline-block;
+  box-shadow:
+    0 -3px 0 0 var(--color-ink),
+    0 3px 0 0 var(--color-ink),
+    -3px 0 0 0 var(--color-ink),
+    3px 0 0 0 var(--color-ink),
+    inset -3px -3px 0 0 rgb(0 0 0 / 0.12);
+  margin: 3px;
+  padding: 0.15rem 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Window title bar with the _ □ × controls (see WindowBar.tsx). */
+.win-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 3px solid var(--color-ink);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.win-ctrls {
+  margin-left: auto;
+  display: flex;
+  gap: 0.45rem;
+}
+.win-ctrls svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  shape-rendering: crispEdges;
+}
+
+/* Pixel-art icons scale without blurring. */
+.pixel-art {
+  image-rendering: pixelated;
+  shape-rendering: crispEdges;
+}
+
+/* Blinking text cursor for the hero. */
+.blink {
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Segmented "Loading…" bar. */
+.pixel-progress {
+  height: 1rem;
+  border: 3px solid var(--color-ink);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--color-grape) 0 10px,
+      transparent 10px 13px
+    )
+    0 0 / var(--progress, 60%) 100% no-repeat,
+    var(--color-paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blink { animation: none; }
+  .brutal-btn { transition: none; }
+}
+
+/* ---- rendered markdown ---- */
+
+.md-body {
+  line-height: 1.75;
+  font-size: 1.05rem;
+}
+.md-body h1, .md-body h2, .md-body h3 {
+  margin: 1.75rem 0 0.75rem;
+  line-height: 1.2;
+}
+.md-body h1 { font-size: 1.9rem; }
+.md-body h2 {
+  font-size: 1.5rem;
+  display: inline-block;
+  background: var(--color-yolk);
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-brutal-sm);
+  padding: 0.1rem 0.6rem;
+}
+.md-body h3 { font-size: 1.2rem; }
+.md-body p { margin: 0.9rem 0; }
+.md-body a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-decoration-color: var(--color-bubble);
+}
+.md-body ul, .md-body ol { margin: 0.9rem 0 0.9rem 1.5rem; }
+.md-body ul { list-style: square; }
+.md-body ol { list-style: decimal; }
+.md-body li { margin: 0.3rem 0; }
+.md-body blockquote {
+  border-left: 6px solid var(--color-ink);
+  background: var(--color-sky);
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+}
+.md-body code {
+  background: var(--color-yolk);
+  color: var(--color-ink);
+  padding: 0.1rem 0.4rem;
+  font-size: 0.95em;
+}
+.md-body pre {
+  background: var(--color-yolk);
+  color: var(--color-ink);
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-brutal-sm);
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+.md-body pre code { padding: 0; background: transparent; }
+.md-body img {
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-brutal);
+  margin: 1rem 0;
+  max-width: 100%;
+}
+.md-body table { border-collapse: collapse; margin: 1rem 0; width: 100%; }
+.md-body th, .md-body td { border: 3px solid var(--color-ink); padding: 0.4rem 0.8rem; }
+.md-body th { background: var(--color-yolk); }
+.md-body hr { border: none; border-top: 3px solid var(--color-ink); margin: 1.5rem 0; }
+
+/* --- Q&A flip cards --- */
+.flip-card { perspective: 1200px; }
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow-y: auto;
+}
+.flip-back { transform: rotateY(180deg); }
+
+/* --- Markdown extras: task lists, video, embeds, math --- */
+.md-body ul { list-style: square; padding-left: 1.4rem; margin: 0.9rem 0; }
+.md-body ol { list-style: decimal; padding-left: 1.4rem; margin: 0.9rem 0; }
+.md-body li { margin: 0.3rem 0; }
+.md-body li:has(> input[type="checkbox"]) { list-style: none; margin-left: -1.4rem; }
+.md-body input[type="checkbox"] {
+  appearance: none;
+  width: 1.05em;
+  height: 1.05em;
+  border: 3px solid var(--color-ink);
+  background: var(--color-paper);
+  vertical-align: -0.15em;
+  margin-right: 0.45em;
+}
+.md-body input[type="checkbox"]:checked {
+  background: var(--color-lime);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5 6.5 12 13 4' fill='none' stroke='%233d2b2b' stroke-width='3'/%3E%3C/svg%3E");
+}
+.md-video {
+  display: block;
+  width: 100%;
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-brutal);
+  margin: 1rem 0;
+  background: var(--color-ink);
+}
+.md-embed {
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-brutal);
+  margin: 1rem 0;
+  background: var(--color-ink);
+}
+.md-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.md-body .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+}
+
+/* --- Code block with copy button --- */
+.md-code { position: relative; margin: 1rem 0; }
+.md-code pre { margin: 0; padding-top: 2.6rem; }
+.md-copy {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-pixel), ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  padding: 0.3rem 0.5rem;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-brutal-sm);
+  cursor: pointer;
+}
+.md-copy:hover { background: var(--color-sky); }
+.md-copy:active { transform: translate(2px, 2px); box-shadow: none; }
+.md-copy svg { width: 0.85rem; height: 0.85rem; }
+
+/* --- Print / "Save as PDF" ---
+   Strips the site chrome and the neo-brutalist shadows (which just waste ink)
+   so an exported post reads as a clean document. Text stays selectable and
+   KaTeX, tables and code render exactly as on screen. */
+@media print {
+  @page {
+    margin: 18mm 16mm;
+  }
+
+  /* Site chrome and any control that shouldn't end up in the PDF. */
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  article {
+    max-width: none !important;
+  }
+
+  /* Flat borders print legibly; the offset shadows do not. */
+  .brutal,
+  .brutal-sm,
+  .brutal-lg,
+  .md-code,
+  .md-body pre,
+  .md-body img,
+  .sticker {
+    box-shadow: none !important;
+  }
+
+  /* Keep the yellow code background and highlights from being dropped by the
+     browser's default "don't print backgrounds" behaviour. */
+  .md-body pre,
+  .md-body code,
+  .md-body th,
+  .sticker,
+  .bg-yolk {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Don't split these across pages. */
+  .md-body pre,
+  .md-code,
+  .md-body img,
+  .md-body table,
+  .md-body blockquote,
+  .katex-display {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .md-body h1,
+  .md-body h2,
+  .md-body h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .md-body img {
+    max-height: 85vh;
+    object-fit: contain;
+  }
+
+  /* Videos and embeds can't print; show a placeholder instead of a black box. */
+  .md-video,
+  .md-embed {
+    display: none !important;
+  }
+}
