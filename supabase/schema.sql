@@ -107,6 +107,21 @@ create table if not exists public.questions (
   created_at timestamptz not null default now()
 );
 
+-- Columns added after the tables' first version. `create table if not exists`
+-- skips existing tables, so these bring an older database up to date.
+alter table public.posts
+  add column if not exists indexable boolean not null default true;
+alter table public.albums
+  add column if not exists sort_mode text not null default 'manual';
+alter table public.album_images
+  add column if not exists media_type text not null default 'image',
+  add column if not exists embed_url text,
+  add column if not exists taken_at date;
+alter table public.album_images
+  alter column storage_path drop not null;
+alter table public.questions
+  add column if not exists answer_gif text;
+
 -- ---------- row level security ----------
 
 alter table public.posts enable row level security;
